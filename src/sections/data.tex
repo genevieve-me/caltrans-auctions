@@ -1,0 +1,48 @@
+For the data section, your objective is to explain the institution (who runs
+the auctions, who participates, what are the auction rules etc., and to
+present information about the data. Divide the Data section into subsections
+if that is helpful. For example, under "institutional details," you can
+explain Caltrans and their auction rules, then define small business bidders
+and the 5\% bid preference.
+
+In the Caltrans highway construction auctions there are (at least) two
+types of construction companies: large and small business bidders.
+Small business bidders may have higher costs than other bidders.
+Caltrans may also give “bid preferences” to the small business bidders.
+
+To be eligible for Small Business Certification:
+a business must be an independently owned and operated in CA;
+have at most 100 employees; average annual gross receipts of less than
+10 million over last 3 tax years.
+
+The small bidder preference is applied when a non-certified bidder
+submits the lowest bid.
+The contract is then awarded to the lowest certified small bidder if
+that firm’s bid is within 5\% of the overall lowest bid.
+The preference is used for comparison purposes only. It does not
+affect the amount paid to the small bidder.
+
+then you can explain the data you have.
+How many auctions in total, the average number of bidders are in each auction,
+and what is the average bid?
+how close are the (winning) bids to the engineer's estimate?
+
+Present a Summary Statistics Table with mean, std. deviation, min, and the max
+of the key variables: small business bids, number of different types of
+bidders, engineer's estimates, workday, and bids.
+(You can ignore all other variables in the data file).
+
+% > summary((caltransdata[caltransdata$SmallBusinessPreference == 1,]$Bid))
+%    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+%   49650   226025   381560   531335   596645 15485562
+%    \begin{tabular}
+%                            & Mean &  SD &  Min &  Max \\
+%        Small Business Bids & 531335 &  & 49650 & 15485562 \\
+%            number of different types of bidders &
+%            Engineer Estimate &
+%        Workday &
+%        Bids &
+%    \end{tabular}
+ 
+
+Then you can have another subsection called "bidding behavior" (you can choose anything you want) where you can plot the CDF and PDF of bids by small business bidders and large business bidders. Explain what you see. You should also use regression analysis to test if bids increase or decrease with bidders, engineer's estimate, and work days. Are your results consistent with what we have learned in class? Make sure you show your regression model carefully, and present the estimates in a table properly labled.

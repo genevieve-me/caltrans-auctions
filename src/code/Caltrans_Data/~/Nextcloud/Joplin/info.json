@@ -1,0 +1,46 @@
+{
+	"version": 3,
+	"e2ee": {
+		"value": true,
+		"updatedTime": 1675243041525
+	},
+	"activeMasterKeyId": {
+		"value": "f3a2dc491a104325aef181cd6f46738d",
+		"updatedTime": 1675240467564
+	},
+	"masterKeys": [
+		{
+			"checksum": "",
+			"encryption_method": 4,
+			"content": "{\"iv\":\"mN5H266z//+4WS0+z0842Q==\",\"v\":1,\"iter\":10000,\"ks\":256,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"f5SZcqsYQMU=\",\"ct\":\"/nhx11B37KZEBggPuMrO4N/mXEsbH6zYz/GvZwAsrZQhM3Kr7i2+vihVjylBYWkOgye+W3J156zA6WGQTFfpd4rGJdnUaRciVQJDK3yIPYjYxlkUGvYO2DAPJuO19syUWeUSBSOOqHOy7h0ojUd1EAg+i4Hp+OG9oYYzbfYB/iObekyGwv4n23Ep0L6lbO7osH58DAEop9BtVU7sZjdk/0GglSv9h3Kc4r6I3vYC9AKyOVFpk5GWvhx0t1nbdChRuCIllmlFIxrFtJSLYu61nGKZdQHmrStLtKAvxxEKSzf+Twh05n3aCuVJu3iMaBv1VFtU1T9E+aOyhmMUea/x96wEBq6deG6xdFWGmzK3lIIFa/7hbAgdqQ/fHqjUYK5Lb2WOE3yRZMYgR8oHZ0ZL6fQowP3a8ng+8T9Jy6T9KtP9H+rFs/qvlpBJBdyC8HbOx2V6XMsWNZRCSklV1EZ5pwexSbVFErZt3J3GjN0hpVGLOb9ppfKohC6AyzYITim7u/u9h7d5RKrulLHgXfS4oTGJ1+D6UKKbvYMQOaYrJ1Ll/6L9zz9/fK8fguMzKt7lIrjAs638QItmsEThcAKKrPRlawOTVL33zqG+OlBCPwJWioYf3DkpVD5OXxmSLOA67zi08t5x0zRJc9XTjCG0WVNvZWmGnJDaQIPRnYsGLGn+8CeOZLMH9A==\"}",
+			"created_time": 1675240467562,
+			"updated_time": 1676581359591,
+			"source_application": "net.cozic.joplin-cli",
+			"hasBeenUsed": true,
+			"id": "f3a2dc491a104325aef181cd6f46738d"
+		},
+		{
+			"checksum": "",
+			"encryption_method": 4,
+			"content": "{\"iv\":\"cstJmFcSZSh4/ChXBS7tuQ==\",\"v\":1,\"iter\":10000,\"ks\":256,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"9y/fe31VPV0=\",\"ct\":\"z5Cku/xyI/H9YMY3Vr0JiIqYUkwp1eL9Q9tEE0kegrH+SxOzpCXUPd8UEGAMMBv4VMTpqH9C1iuDLwZ8g4rJh1oU3HkLXa3Su9YgN7pOEpL/GyDdS11IX7f5HhfLigGfCMFcREvTBqGV0oVfOJK8W6vn6Bx5FBaBU+7a0DUzG9U5h1SfxE/Lyo1kyHpjV+QXabQfkI/KJue3CkHYJUfAs8FEUF/lKIceyuvnW3JZNVEsSxY0UWtTxmyT4a1tBHLB8hfQ6ff/+VXGgcADbXfd9OZJnMEJBHuhJmuHpANRks9BhfBUd8tSO81+Bz5jmyKmaEPVHwzu8nPzTbIYYeK0YOCAyWoo4VXb5dWogAhiW3iCfTDZbZH0g9/2V/nTA/eEoAMorrahX8L2JgBu3eHGVaAxAE+duOQQK3ORkFeYuhEdnbVk8raySoOw5UsI6D8xcdAfQVh+X65svgm9eUD87ghj7phliPsgAa7HMU2cvhBDAV6TvDdccs0HVQE/FbiGzbsQ7eok4/h/sVzvcbOLYiz55ODGwSCXH9t5ALRZF7n6Fab0dkXm7HMxL7CmvIn1WpLevU+9Do0H1/xaCARGm3abVaIVDNtS+IzvIatRAvAu+fdbr+I8Gl9/5Qpgiyy6WxGqblVZM/BFiw7lWBDbvlo7Mexor9jP1hKXQD5iXVNXtm3f//E0TQ==\"}",
+			"created_time": 1676581275194,
+			"updated_time": 1676581275194,
+			"source_application": "net.cozic.joplin-cli",
+			"hasBeenUsed": false,
+			"id": "cafc704ffc6841e58bb977fcc65f905a"
+		}
+	],
+	"ppk": {
+		"value": {
+			"id": "fqmLPbv3tmTQnmEXXjMTfP",
+			"keySize": 2048,
+			"privateKey": {
+				"encryptionMethod": 4,
+				"ciphertext": "{\"iv\":\"+CPvQ8utkoZJcQBSNNpkSA==\",\"v\":1,\"iter\":10000,\"ks\":256,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"f5SZcqsYQMU=\",\"ct\":\"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\"}"
+			},
+			"publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAgG9CMl5V+ClexG3Mwqoan3fVpkkSMY4qUdfpGqmznrYJIjA3roTP\ngDqpoUAZtGUL1rdIBT4Ob4rACA+SIqtolAU1RlKcUAPUBQp2YedqvqRs7S+PMYtZ\nS4o/qmKjAk+8YeaocyRFFLvkDcBVkxpdDkRbZo3+bgzt4HYtoS1RZ2yS4xW4m2xM\nJ5/p6Bn7nnwL6XEpi+2Is2Hwjw2E9C6F1rcnCApsSyDDMUlyO7f3of9qkpoq9Stk\nz7iX3s00lPUYemG7taLwF5GDdkPYCFrR8WXEWERT92oMSqdBhGLMaFxzJLdUQvbn\nE3AUGZA/gMBhm733y6Gn4dCyAzg46EHfoQIDAQAB\n-----END RSA PUBLIC KEY-----",
+			"createdTime": 1675240851783
+		},
+		"updatedTime": 1675240851783
+	}
+}
