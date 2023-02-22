@@ -1,11 +1,25 @@
-This is based on direnv, which can be set up with
-[home-manager](https://github.com/nix-community/home-manager) via:
+## Building
+
+This repository can be built with
+```
+Rscript ./src/code/*.R
+tectonic -X build
+```
+or with `nix build`, which will automatically pull in all dependencies
+and offers improved reproducibility.
+
+## Developing
+
+The devshell for this repository is most easily used with nix-direnv, which can
+be set up with [home-manager](https://github.com/nix-community/home-manager):
 
 ```
+...
 programs.direnv = {
   enable = true;
   nix-direnv.enable = true;
 };
+...
 ```
 
 On non-NixOS systems, home-manager can be installed
