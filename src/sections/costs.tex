@@ -1,0 +1,96 @@
+\section{Identification}
+
+\setlength{\parindent}{0cm}
+
+\subsection{Empirical Strategy}
+
+While we have all the submitted bids, we do not have the original costs
+businesses estimated for themselves. However, assuming all bidders used
+an optimal strategy, we can recover those costs.
+
+Recall the FOCs and differential equations:
+
+\[
+  \begin{aligned}
+  & \max_{b_i} \Pi(b_i, c_i), \qquad \max_{b_i} \Pi(b_i, c_i) \\
+  1 &= (b_i - c_i) \cdot \left(
+    \frac{(n_S - 1) \cdot f_S(c_i \mid E)}{1 - F_S(c_i \mid E) \cdot \beta_S'(c_i)} +
+    \frac{(n_L) \cdot f_L(1.05 c_i \mid E)}{1 - F_L(1.05 c_i \mid E) \cdot \beta_L'(c_i)} \right) \\
+  1 &= (b_i - c_i) \cdot \left(
+    \frac{(n_S) \cdot f_S(\frac{1}{1.05} c_i \mid E)}{1 - F_S(\frac{c_i}{1.05} \mid E) \cdot \beta_S'(c_i)} +
+    \frac{(n_L - 1) \cdot f_L(c_i \mid E)}{1 - F_L(c_i \mid E) \cdot \beta_L'(c_i)} \right)
+  \end{aligned}
+\]
+
+These have the boundary conditions \( \beta_S(\bar{c}) = 1.05 \beta_L(\bar{c}) = 1.05\bar{c}\)
+and \(\beta_S(\ubar{c}) = 1.05\beta_L(\ubar{c})\).
+
+Just as \(f\) is the pdf of costs, denote the pdf of bids by \(g\).
+
+\vspace{0.2cm}
+
+Now recall that \(G(b; E, n_S, n_L\) is the CDF of bids (with parameters:
+engineer's estimate, number of small businesses, and number of large businesses) and
+\(F(c; E, n_S, n_L)\) is the CDF of costs, with costs \(c_i = \beta^{-1}(b_i)\) for the appropriate
+\(\beta_S, \beta_L\).
+Furthermore, bidding functions are strictly monotonic and therefore
+one-to-one (map one cost uniquely to one bid).
+Given this, a lower bid implies a firm also has a lower cost. We show that for one bidder's bid \(B\):
+\[ \begin{aligned}
+  1 - G_S(b_i \mid n_S, n_L, E) &= P(\beta_S^{-1}(B) \ge \beta_{S}^{-1}(b) \mid E) \text{ because bids are monotonic} \\
+    &= P(C \ge B_{S}^{-1}(b) \mid E) = 1 - F_{S} (\beta_{S}^{-1}(b)) \\
+  G_S(b_i \mid n_S, n_L) &= F_S(\beta_S^{-1}(b_i))
+\end{aligned} \]
+and 
+\[ \begin{aligned}
+  1 - G_L(b_i \mid n_S, n_L, E) &= P(\beta_L^{-1}(B) \ge \beta_{L}^{-1}(b) \mid E) \text{ because bids are monotonic} \\
+    &= P(C \ge B_{L}^{-1}(b)) = 1 - F_{L} (\beta_{L}^{-1}(b)) \\
+  G_L(b_i \mid n_S, n_L) &= F_L(\beta_L^{-1}(b_i)).
+\end{aligned} \]
+
+Furthermore, to get $g_S$ and $g_L$ we must take the derivatives of $G_S$ and $G_L$:
+\(\frac{dx}{dy} = \frac{1}{m'(x)} \implies \frac{dm^{-1}}{dy} = \frac{1}{m'(m^{-1}(y))}\):
+
+\[ \begin{aligned}
+  \frac{d}{db_i} G_L(b_i \mid n_S, n_L, E) &= \frac{d}{db_i} F_L(\beta_L^{-1}(b_i)) \\
+  g_L(b_i \mid n_S, n_L, E) &= f_L(\beta_L^{-1}(\beta_L(c_i))) \beta_L'(\beta_L^{-1}(b_i))
+\end{aligned} \]
+
+Similarly, 
+\[
+  F_{S}'(\beta_{S}^{-1}(b)) = f_{S}(\beta_S^{-1}(b)) \cdot \frac{1}{\beta_S'(\beta_S^{-1}(b))}
+\]
+
+\subsubsection{Recovering Bidder Costs}
+
+Plugging this in to the partial differential equation which gives the optimal
+bidding function for small businesses, we obtain:
+\[
+  \begin{aligned}
+    1 = (b_i - c_i) \cdot & \left(
+    \frac{(n_S - 1) \cdot g_S(\beta_S(c_i \mid E) \mid n_S, n_L) \cdot \beta_S'(\beta_1^{-1}(b)}{1 - G_S(b_i \mid n_1, n_2) \cdot \beta_S'(c_i)} +
+    \frac{(n_L) \cdot g_L(1.05 b_i \mid n_L, n_S) \cdot \beta_L'(c_i)}{1 - G_L(1.05 b_i \mid n_L, n_S) \cdot \beta_L'(c_i)} \right) \\
+  = (b_i - c_i) \cdot & \left(
+    \frac{(n_S - 1) \cdot g_S(\beta_S(c_i \mid E) \mid n_S, n_L)}{1 - G_S(b_i \mid n_1, n_2) \cdot} +
+    \frac{(n_L) \cdot g_L(1.05 b_i \mid n_L, n_S)}{1 - G_L(1.05 b_i \mid n_L, n_S)} \right) \\
+  c_i(b_i; E, n_S, n_L) &= b_i - \left(\frac{(n_S - 1) \cdot g_S(\beta_S(c_i \mid E) \mid n_S, n_L)}{1 - G_S(b_i \mid n_1, n_2) \cdot} +
+    \frac{(n_L) \cdot g_L(1.05 b_i \mid n_L, n_S)}{1 - G_L(1.05 b_i \mid n_L, n_S)} \right)^{-1} \\
+  \end{aligned}
+\]
+
+Similarly, we can put the costs in terms of bids and \(g_L\) for large businesses:
+\[
+  \begin{aligned}
+    1 = (b_i - c_i) \cdot & \left(
+    \frac{(n_S) \cdot g_S(\frac{1}{1.05} \beta_S(c_i \mid E) \mid n_S, n_L) \cdot \beta_S'(\beta_1^{-1}(b)}{1 - G_S(\frac{1}{1.05} b_i \mid n_1, n_2) \cdot \beta_S'(c_i)} +
+    \frac{(n_L - 1) \cdot g_L(b_i \mid n_L, n_S) \cdot \beta_L'(c_i)}{1 - G_L(b_i \mid n_L, n_S) \cdot \beta_L'(c_i)} \right) \\
+  = (b_i - c_i) \cdot & \left(
+    \frac{(n_S) \cdot g_S(\frac{1}{1.05} \beta_S(c_i \mid E) \mid n_S, n_L)}{1 - G_S(\frac{1}{1.05} b_i \mid n_1, n_2) \cdot} +
+    \frac{(n_L - 1) \cdot g_L(b_i \mid n_L, n_S)}{1 - G_L(b_i \mid n_L, n_S)} \right) \\
+  c_i(b_i; E, n_S, n_L) &= b_i - \left(\frac{(n_S) \cdot g_S(\frac{1}{1.05} b_i \mid n_S, n_L)}{1 - G_S(\frac{1}{1.05} b_i \mid n_1, n_2) \cdot} +
+    \frac{(n_L - 1) \cdot g_L(b_i \mid n_L, n_S)}{1 - G_L(b_i \mid n_L, n_S)} \right)^{-1} \\
+  \end{aligned}
+\]
+
+In the next section, we can then use the bid data and kernel density estimates of \(G_S, G_L\) to
+recover estimates of the cost.

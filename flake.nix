@@ -20,7 +20,7 @@
         rEnvPackages = with pkgs.rPackages; [
           languageserver lintr
           tidyverse markdown rmarkdown knitr xtable
-          nor1mix
+          nor1mix locfit
         ];
         R-dev = pkgs.rWrapper.override {
           packages = rEnvPackages;
@@ -59,9 +59,10 @@
                     mkdir -p $out/bin
                     makeWrapper ${pkgs.rstudioWrapper.override {
                       packages = with (pkgs.rPackages); [
-                        markdown rmarkdown knitr tidyverse lintr
+                        markdown rmarkdown knitr tidyverse lintr xtable shiny
+                        locfit ks hdrcde ncdf4 devtools
                       ];
-                    }}/bin/rstudio $out/bin/rstudio --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.texlive.combined.scheme-full pkgs.pandoc]}
+                    }}/bin/rstudio $out/bin/rstudio --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.texlive.combined.scheme-full pkgs.pandoc pkgs.zlib]}
                   ''
                 );
             in
@@ -80,7 +81,6 @@
             buildPhase = ''
               export PATH="${pkgs.lib.makeBinPath buildInputs}";
               export HOME="$TMP" ;
-	      # rm ./src/sections/data-regression.tex
               Rscript ./src/code/data.R
               tectonic -X build
             '';

@@ -23,8 +23,8 @@ programs.direnv = {
 ```
 
 On non-NixOS systems, home-manager can be installed
-[as described in its manual](https://nix-community.github.io/home-manager/index.html#sec-flakes-standalone)
-- i.e., run
+[as described in its manual](https://nix-community.github.io/home-manager/index.html#sec-flakes-standalone);
+i.e., run
 ```
 nix flake new ~/.config/nixpkgs -t github:nix-community/home-manager
 nix build --no-link path:~/.config/nixpkgs#homeConfigurations.jdoe.activationPackage

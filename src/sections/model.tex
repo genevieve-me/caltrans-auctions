@@ -1,80 +1,122 @@
 \section{Model}
 
+\setlength{\parindent}{0cm}
+
 \subsection{Assumptions}
+
+First, recall the auction rules: a small business bid
+within 5\% of the lowest bid will win, and the procurer will receive their
+bid. Thus, the 5\% rule affects the expectation of winning, but not the payoff.
+Because there are two groups of businesses, we have asymmetric bidders which
+we will refer to as \(L\) and \(S\), with \(n_L + n_S = n\), and \(n \ge 2\).
+
+Similarly, refer to the CDFs of the costs as \(F_{L} \ne F_{S}\)
+on the support  \([\ubar{c}, \bar{c}]\).
 
 We assume that during the CalTrans auction, the bidders had costs that
 were independent and drawn from an identical distribution, and that the costs
 were private. (Since these were procurement auctions, cost is the analogue to
-valuation).
-Would interdependent costs make more sense given the engineer's estimate?
+valuation). However, the distribution is conditional on some estimate.
 
-Similarly, we take into account the rules of the auction: a small business bid
-within 5\% of the lowest bid will win, and the procurer will receive their
-bid. Thus, the 5\% rule affects the expectation of winning, but not the payoff.
-Because there are two groups of businesses, we have asymmetric bidders which
-we will refer to as \(L\) and \(S\).
-
-Similarly, refer to the CDFs of the costs as \(F_{L}\) and \(F_{S}\),
-with \(c \sim F_L(\cdot \mid x)\) for small bidders and
-\(c \sim F_L(\cdot \mid x)\) for large bidders.
+These distributions are unknown, and we do not have complete information, on
+their parameters. However, we do know that they are conditional on an engineer's
+estimate provided by CalTrans, which approximates the true cost.
+distributed according to some unknown, distinct parameters,
+Therefore, we write that \(c \sim F_{L \text{ or } S}(\cdot \mid E)\),
+where \(\cdot\) represents parameters and \(E\) represents the estimate.
  
 Bidding functions are assumed to be monotonically increasing in cost.
 Similarly, all bidding functions are assumed to satisfy \(\beta(0) = 0\).
-Lastly, require that each \(\beta_{i}\) satisfies \(\phi_{i} = \beta_{i}^{-1}\).
+Require that \(\beta_L(\bar{c}) = \beta_S(\bar{c})\), and that
+each \(\beta_{i}\) has an inverse \(\phi_{i} = \beta_{i}^{-1}\).
 
-We assume that within the groups, each bidder uses the same optimal strategy,
-denoted \(\beta_S\) and \(\beta_L\).
+Finally, we assume that within the groups, each bidder uses the same optimal
+strategy, denoted \(\beta_S\) and \(\beta_L\).
 
 % Define a maximum cost \(\omega\) at which bidding functions should be equal
 % (common highest bid).
+
+\subsection{Bidders' Optimization Problems}
 
 Since the auction is a first price auction, we can define the expected payoffs
 for a small business \(i\) (with large business competitors \(k\) and
 other small business competitors \(j \ne i\), where the numbers of
 small/large bidders are \(n_S, n_L\)) as:
 
+% \[
+%   \begin{aligned}
+%   \Pi(\beta_S (c_i), c_i) &= (\beta_S(c_i) - c_i) \cdot
+%     P \left( \beta_S (c_i) < \beta_S(c_j) \forall j \neq i \land
+%     \beta_S (c_i) < \frac{1}{1.05} \beta_L(c_k) \forall k \right) \\
+%   &= (\beta_S(c_i) - c_i) \cdot \left(
+%     \left( 1 - F_S(\beta_{S}^{-1}(\beta_S(c_i))) \right)^{n_S - 1}
+%     \left( 1 - F_L(\frac{1}{1.05} \beta_{L}^{-1}(\beta_L(c_i))) \right)^{n_L} \right)
+%   \end{aligned}
+% \]
 \[
   \begin{aligned}
-  \Pi(\beta_S (c_i), c_i) &= (\beta_S(c_i) - c_i) \cdot
-    P \left( \beta_S (c_i) < \beta_S(c_j) \forall j \neq i \land
-    \beta_S (c_i) < \frac{1}{1.05} \beta_L(c_k) \forall k \right) \\
-  &= (\beta_S(c_i) - c_i) \cdot \left(
-    \left( 1 - F_S(\beta_{S}^{-1}(\beta_S(c_i))) \right)^{n_S - 1}
-    \left( 1 - F_L(\frac{1}{1.05} \beta_{L}^{-1}(\beta_L(c_i))) \right)^{n_L} \right)
+    P(b_i \text{ wins}) &= P \left(
+    b_i< b_j \forall j \ne i 
+   \land \frac{1}{1.05} b_i < b_k \forall k \right) \\
+  \Pi(\beta_S(c_i), c_i) = \Pi(b_i, c_i) &= (b_i - c_i) \cdot
+    P \left(b_i < \beta_S(c_j) \forall j \neq i \land
+    b_i < 1.05 \beta_L(c_k) \forall k \right) \\
+  \text{Since valuations } & \text{are private, denote opponent bids as } b_j, b_k \\
+  \Pi(b_i, c_i) &= (b_i - c_i) \cdot
+    P \left(b_i < b_j \forall j \neq i \land
+    b_i < 1.05 b_k \forall k \right) \\
+  &= (b_i - c_i) \cdot \left(
+    \left( 1 - F_S(\beta_{S}^{-1}(b_i) \mid E) \right)^{n_S - 1}
+    \left( 1 - F_L(\beta_{L}^{-1}(1.05b_i) \mid E) \right)^{n_L} \right)
   \end{aligned}
 \]
 
-Similarly, for a large business, with small businesses \(j\) and other
-large busineses \(k \ne i\):
+Similarly, for a large business \(i\) with bid \(b_i = \beta_L(c_i)\), with
+small businesses \(j\) and other large busineses \(k \ne i\):
 
 \[
   \begin{aligned}
-  \Pi(\beta_L (c_i), c_i) &= (\beta_L(c_i) - c_i) \cdot
-    P \left( \beta_L (c_i) < 1.05 \cdot \beta_S(c_j) \forall j \land
-    \beta_L (c_i) < \beta_L(c_k) \forall k \ne i \right) \\
-  &= (\beta_L(c_i) - c_i) \cdot \left(
-    \left( 1 - F_S(1.05 \beta_{S}^{-1}(\beta_S(c_i))) \right)^{n_S}
-    \left( 1 - F_L(\beta_{L}^{-1}(\beta_{L}(c_i))) \right)^{n_L - 1} \right)
+    P(b_i \text{ wins}) &=
+    P \left( b_i < \frac{1}{1.05} \cdot b_j \forall j \land
+    b_i< b_k \forall k \ne i \right) \\
+    % \left( 1 - F_S(1.05 \beta_{S}^{-1}(b_i)) \right)^{n_S}
+    % \left( 1 - F_L(\beta_{L}^{-1}(\beta_{L}(c_i))) \right)^{n_L - 1} \right) \\
+  \Pi(\beta_L (c_i), c_i) &= (b_i - c_i) \cdot
+    P \left( b_i < \frac{1}{1.05} \cdot b_j \forall j \land
+    b_i< b_k \forall k \ne i \right) \\
+  &= (b_i - c_i) \cdot \left(
+    \left( 1 - F_S(\beta_{S}^{-1}(\frac{b_i}{1.05}) \mid E) \right)^{n_S}
+    \left( 1 - F_L(\beta_{L}^{-1}(b_i) \mid E) \right)^{n_L - 1} \right)
   \end{aligned}
 \]
 
-Then, they will choose their bid based on
-\[
-  \max_{c_i; \beta_S} \Pi(c_i; \beta_S)
-  \text{ or }
-  \max_{c_i; \beta_L} \Pi(c_i; \beta_L)
-\]
+Then, they will choose their bid based on their first order condition,
+\(\max_{b_i} \Pi(b_i, c_i)\) or \(\max_{b_i} \Pi(b_i, c_i)\).
 
-their first order condition.
+For a small business, this gives the differential equation:
 
-For a small business, this equals:
+% FIXME: he wants to see the full derivation
 
 \[
-  1 = (\beta_L(c_i) - c_i) \cdot \left(
-    \frac{(n_S - 1) \cdot f_S(c_i)}{1 - F_S(c_i) \cdot \beta_S'(c_i)} +
-    \frac{(n_L - 1) \cdot \frac{1}{1.05} f_L(c_i)}{1 - F_L(c_i) \cdot \beta_L'(c_i)} \right)
+  1 = (b_i - c_i) \cdot \left(
+    \frac{(n_S - 1) \cdot f_S(c_i \mid E)}{1 - F_S(c_i \mid E) \cdot \beta_S'(c_i)} +
+    \frac{(n_L) \cdot f_L(1.05 c_i \mid E)}{1 - F_L(1.05 c_i \mid E) \cdot \beta_L'(c_i)} \right)
 \]
 
-This equation has the boundary conditions
+Similarly, for a large business the first order condition gives:
+
+\[
+  1 = (b_i - c_i) \cdot \left(
+    \frac{(n_S) \cdot f_S(\frac{1}{1.05} c_i \mid E)}{1 - F_S(\frac{c_i}{1.05} \mid E) \cdot \beta_S'(c_i)} +
+    \frac{(n_L - 1) \cdot f_L(c_i \mid E)}{1 - F_L(c_i \mid E) \cdot \beta_L'(c_i)} \right)
+\]
+
+FIXME: the boundary conditions need to take the 5\% rule into account.
+
+Together we have a system of equations satisfying
 \(\beta_S (\bar{c}) = \beta_L (\bar{c}) = \bar{c}\) and
-\( \beta_S( \ubar{c} ) = \beta_L( \ubar{c} ) = \ubar{c} \).
+\( \beta_S( \ubar{c} ) = \beta_L( \ubar{c} )\).
+From this system we will be able to obtain the costs and
+\(F_{L \text{ or } S}(\cdot \mid E)\).
+
+\setlength{\parindent}{1.5em}
