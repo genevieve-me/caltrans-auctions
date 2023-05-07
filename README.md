@@ -1,4 +1,27 @@
-## Building
+# Python libraries
+
+The Python code for this paper can all be found in `./src/code/data.R`.
+It relies on `pandas` for general data manipulation, `seaborn` for
+visualization, `numpy` for auxiliary functions like `cumsum`, and `statsmodels`
+for regression and other modelling.
+
+## R libraries
+
+Similarly, the R code for this paper is at `./src/code/data.R`.
+It relies on the libraries `hdrcde`, for conditional kernel density estimation
+with the `cde` function,
+`climod`, for integrating that density with `pdf2cdf`, and
+`sfsmisc` for integration of generic densities with `integrate.xy`.
+R libraries have better facilities than Python for KDE as of 2023.
+
+# LaTeX
+
+The LaTeX code for this paper should be built with LuaLaTeX or XeLaTeX because
+it relies on the `unicode-math` library for modern mathematical symbols.
+It is compiled with [Tectonic](https://tectonic-typesetting.github.io/en-US/),
+with file structure described in `Tectonic.toml`.
+
+# Building
 
 This repository can be built with
 ```

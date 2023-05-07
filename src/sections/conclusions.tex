@@ -1,14 +1,53 @@
 \section{Conclusion}
 
-We were able to obtain estimates of the distribution of values for bidders
-on CalTrans procurement projects using data on their bids and estimates of
+We were able to obtain estimates of the distribution of costs (analagous to private values)
+for bidders on CalTrans procurement projects using data on their bids and estimates of
 the true cost. This is because there is an optimal bidding function which we
 assume the bidders followed. The work was complicated by the existence of
 small- and large-business type bidders.
 
-\section{Appendix - Code}
+The first step of this analysis was to explore bidding behavior by modeling the
+bidding functions for small business bidders and large business bidders.
+These models demonstrated the probability of winning a particular auction,
+since in first price procurement auction, the bidder with the lowest cost or value
+will win the auction, assuming all participants are rational.
+We then maximized the expected profits using optimization to recover the costs,
+as the Caltrans data only reports submitted bids.
+Finally, using conditional kernel density estimation, we found estimated
+cost distributions for small business bidders and large business bidders.
 
-The following is the R code used to prepare the data section of the paper.
+Using a subset of the bidding data, as well as the data on
+engineers' estimates, we plotted the PDFs and CDFs of the bidding distributions
+and cost distributions for both small business bidders and large business bidders.
+To simplify these calculations we only focused on auctions with the most prominent combination of small business and large business bidders.
+This ends up being auctions with one small business and three large businesses.
+These plots were our main results and demonstrated the respective behaviors of such bidders.
+
+One addendum that we explored with this data was a counterfactual scenario in which
+second price auction with reserve prices was used. This explored what costs may have
+been for Caltrans if there was no bidder preference or `5\% rule.' Instead,
+if Caltrans had set specific reserve prices for small businesses and large businesses,
+we found that the average cost of Caltrans projects would have been lower.
+Thus, reserve prices may be beneficial for Caltrans and other public utilities because they decrease their costs. 
+
+This paper exhibits three main weaknesses. The first was the simplification to only look at
+auctions with 1 small and 3 large business bidders, which notably reduced
+the sample size from 705 to 59; and the use of the median
+engineer's estimate throughout. The second was the reliance on kernel density estimation
+to model bidding behavior, which is only asymptotically unbiased and presented
+an issue as those density estimates were plugged in to recover cost estimates.
+The last was issues with floating point error when dealing with the inverse
+of very large bids, which we could see with inverse transform sampling
+in the counterfactual section and with a handful of `infinite' estimates when
+recovering costs, which had to be included.
+
+Overall, the findings of this report demonstrated how firms bid in these Caltrans low-bid procurement auctions.
+Using auction theory principles, we are able to evaluate and explore bidding behavior in real auctions.
+These findings allow us to predict in future auctions how opposing bidders will act, so that bidders can maximize their profits.
+Each case study gives us more information as to how bidders act in auctions.
+% \section{Appendix - Code}
+
+% The R code used to prepare the paper is found in `src/code/data.R`.
 
 %\lstinputlisting[firstline=1, lastline = 32]{./code/data.R}
-\lstinputlisting{./code/data.R}
+%\lstinputlisting{./code/data.R}

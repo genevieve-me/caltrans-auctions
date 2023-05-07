@@ -1,15 +1,12 @@
-\section{Identification}
+\section{Identification and Empirical Estimation Strategy}
 
-\setlength{\parindent}{0cm}
-
-\subsection{Empirical Strategy}
+\subsection{Cost Distribution}
 
 While we have all the submitted bids, we do not have the original costs
 businesses estimated for themselves. However, assuming all bidders used
 an optimal strategy, we can recover those costs.
 
 Recall the FOCs and differential equations:
-
 \[
   \begin{aligned}
   & \max_{b_i} \Pi(b_i, c_i), \qquad \max_{b_i} \Pi(b_i, c_i) \\
@@ -31,34 +28,35 @@ Just as \(f\) is the pdf of costs, denote the pdf of bids by \(g\).
 
 Now recall that \(G(b; E, n_S, n_L\) is the CDF of bids (with parameters:
 engineer's estimate, number of small businesses, and number of large businesses) and
-\(F(c; E, n_S, n_L)\) is the CDF of costs, with costs \(c_i = \beta^{-1}(b_i)\) for the appropriate
-\(\beta_S, \beta_L\).
+\( F(c; E) \) is the CDF of costs, with costs \(c_i = \beta^{-1}(b_i)\) for the appropriate
+\(\beta_S, \beta_L\). Note that the bids depend on number of bidders, but not the costs;
+both are dependent on estimates, so everything we show below is conditional on \( E \).
 Furthermore, bidding functions are strictly monotonic and therefore
 one-to-one (map one cost uniquely to one bid).
 Given this, a lower bid implies a firm also has a lower cost. We show that for one bidder's bid \(B\):
 \[ \begin{aligned}
   1 - G_S(b_i \mid n_S, n_L, E) &= P(\beta_S^{-1}(B) \ge \beta_{S}^{-1}(b) \mid E) \text{ because bids are monotonic} \\
-    &= P(C \ge B_{S}^{-1}(b) \mid E) = 1 - F_{S} (\beta_{S}^{-1}(b)) \\
-  G_S(b_i \mid n_S, n_L) &= F_S(\beta_S^{-1}(b_i))
+    &= P(C \ge B_{S}^{-1}(b) \mid E) = 1 - F_{S}(\beta_{S}^{-1}(b); E) \\
+  G_S(b_i \mid n_S, n_L) &= F_S(\beta_S^{-1}(b_i); E)
 \end{aligned} \]
 and 
 \[ \begin{aligned}
   1 - G_L(b_i \mid n_S, n_L, E) &= P(\beta_L^{-1}(B) \ge \beta_{L}^{-1}(b) \mid E) \text{ because bids are monotonic} \\
-    &= P(C \ge B_{L}^{-1}(b)) = 1 - F_{L} (\beta_{L}^{-1}(b)) \\
-  G_L(b_i \mid n_S, n_L) &= F_L(\beta_L^{-1}(b_i)).
+    &= P(C \ge B_{L}^{-1}(b)) = 1 - F_{L}(\beta_{L}^{-1}(b); E) \\
+  G_L(b_i \mid n_S, n_L) &= F_L(\beta_L^{-1}(b_i); E).
 \end{aligned} \]
 
 Furthermore, to get $g_S$ and $g_L$ we must take the derivatives of $G_S$ and $G_L$:
 \(\frac{dx}{dy} = \frac{1}{m'(x)} \implies \frac{dm^{-1}}{dy} = \frac{1}{m'(m^{-1}(y))}\):
 
 \[ \begin{aligned}
-  \frac{d}{db_i} G_L(b_i \mid n_S, n_L, E) &= \frac{d}{db_i} F_L(\beta_L^{-1}(b_i)) \\
+  \frac{d}{db_i} G_L(b_i \mid n_S, n_L, E) &= \frac{d}{db_i} F_L(\beta_L^{-1}(b_i); E) \\
   g_L(b_i \mid n_S, n_L, E) &= f_L(\beta_L^{-1}(\beta_L(c_i))) \beta_L'(\beta_L^{-1}(b_i))
 \end{aligned} \]
 
 Similarly, 
 \[
-  F_{S}'(\beta_{S}^{-1}(b)) = f_{S}(\beta_S^{-1}(b)) \cdot \frac{1}{\beta_S'(\beta_S^{-1}(b))}
+  F_{S}'(\beta_{S}^{-1}(b); E) = f_{S}(\beta_S^{-1}(b)) \cdot \frac{1}{\beta_S'(\beta_S^{-1}(b))}
 \]
 
 \subsubsection{Recovering Bidder Costs}

@@ -1,0 +1,84 @@
+\section{Counterfactual}
+ 
+To favor small businesses, instead of using the 5\% rule which exhibits
+a preference towards small business auction participants, Caltrans could implement reserve prices in their auctions. A reserve price is a price set by the auctioneer such that if all bidders bid above the reserve price, no one will win (for low-bid auction). For Caltrans, if the reserve price is not met, then the project would cost the engineer's estimate and Caltrans would carry out the project instead of outsourcing it. We will determine two reserve prices for Caltrans auctions: one for small businesses and one for large businesses. These auctions with reserve prices will be a second price auction, such that the project will cost the second lowest bid.
+We will use this to study a theoretical alternative where
+CalTrans had performed second price auction with reserve prices,
+using costs because it is optimal to bid one's cost in SPA.
+
+The assignment of the auction winner and cost follows the following rules.
+If a small business has the lowest bid, but they do not meet the reserve price, then the project will cost the engineers estimate and nobody wins the auction.
+Next, if a small business wins the auction and bids below or at the reserve price, then if the second lowest bid is below the reserve price, the winner will get paid the second lowest bid.
+However, if the second lowest bid is above the reserve price, the winner will get paid the reserve price.
+Another scenario is that a large business wins the auction, but does not bid below the reserve price.
+If the small business is the second lowest bid and is below their reserve price, then they will win the auction and pay the reserve price for
+small businesses.
+Finally, if a large business wins the auction and bids below their reserve price, then they will carry out the project and get paid the second lowest bid if it is below their reserve price, or the reserve price for large
+businesses if the second lowest bid is above that reserve price.
+ 
+To calculate the reserve prices for small and large businesses we used the following equation: \[r*=c_0 - \frac{F(r*)}{f(r*)}\]
+Note that as long as small businesses tend to have higher costs, a `tiered'
+reserve price system set this way will favor them.
+ 
+The optimal reserve price is r*. We used $F_s$ and $f_s$ for small businesses and $F_l$ and $f_l$ for large businesses, while using the median engineer's estimate (to make small and large businesses comparable).
+We will also denote the small business reserve prices by \( r_s \)  and $r_l$ for the large business reserve prices.
+We want to determine how this new rule affects costs for Caltrans. To determine this we randomly draw 1 cost from $F_s$ and 3 costs from $F_l$ (since as before, we are focusing on the largest subset of auctions with those \(n_L\) and \(n_S\) for simplicity).
+This is repeated 1,000 times to find an Monte Carlo average. We found the average cost for SPA with reserve price to be around \$390,000, but it is important to note that the average cost is different each time.
+Additionally, R was intermittently unable to find costs from our estimated
+CDF via inverse transform sampling at the tail end due to floating
+point errors in the uniroot function. For this reason,
+we are only sampling from the 0.01 to 0.90th percentiles of the distribution.
+It is thus likely that the average cost with reserve price is slightly
+underestimated.
+
+ To find the average cost of the auction format with the 5\% rule, we determined the winning bids of all the auctions from our subset and then took the average. This average was \$726,000, and is a known empirical
+result from the historical Caltrans data.
+
+The difference between the average cost from SPA with reserve prices and the average cost from FPA with bidder preference aligns with what auction theory tells us. Without reserve prices the revenue from SPA and FPA should be equal due to the Revenue Equivalence Theorem as long as the
+assignment rules are exactly the same. However, our optimal reserve
+prices will not necessarily always lead to the same results as the 5\% rule,
+since they do not follow that standard but instead minimize costs for Caltrans.
+
+ When revenue equivalence holds and once a reserve price is added, expected revenue should increase. Despite the strongest form of the revenue equivalence
+theorem not holding here, revenue should still be similar between first and second price auction. The marked difference in expected costs that we found
+in our simulations, where the average cost with a reserve price is considerably lower compared to the average cost with only bidder preference,
+reflects this result. A lower cost is better for Caltrans because they do not have to spend as much on their highway projects. Further research on
+the effect of reserve prices on public auctions should be undertaken to confirm this.
+
+% Suppose the median eng. estimate value is 100.
+% Go to the data and find auctions that have eng. estimate (close to) 100,
+% and \(n_s=1, n_l=3\). From this subset, determine the winning bids.
+% Remember the 5\% discount. If there are many auctions, take the average of these winning bids.
+% That is the average cost of doing a project that CALTRANS expects to cost 100
+% when CALTRANS implements a 5\% bid discount.
+
+% Now, we want to know what happens to the cost of doing the job if CALTRANS abandons
+% the 5\% bid discount but instead determines two reserve prices (one for small and
+% one for large) and runs a second price auction. Your next task (under the section
+% titled Counterfactual Exercise) is to determine the effect of this new rule on
+% costs for CALTRANS. In other words, I want you to take the estimated cost CDFs
+% and PDFs, determine reserve prices (see lecture note), draw costs from appropriate
+% CDFs, implement the SPA, save the winning bid, and repeat this several times,
+% then take the average. That new average is the average cost of using this new
+% auction. And compare that with the one you found above and explain the results. 
+ 
+% Steps:
+
+% Find the reserve price:
+% - Use the median eng. estimate \( c_0 \) and \( F_s \) and \( f_s \) to determine
+%   the reserve price for small bidders. Call it \( r_s \).
+% %- Repeat 1, but for F_l and f_l. Call it r_l.
+% To find reserve prices:
+% - \( m \) is seller's revenue, \(f and F\) are PDF and CDF of true value,
+%   and \( \beta \) is the bidding function
+% Then, we randomly one small business cost and three large business costs using
+% inverse transform sampling.
+%  If the reserve prices are r_s=10 for small and r_l=5 for large, and all the
+%  n_s-many bids are > 10 and all the n_l-many bids are > 5, then CALTRANS will
+%  not award the bid to anyone and will have to do the job which will cost the engineer's estimate.
+%  In our case, 100. you have to consider different cases to determine the winning bid.
+%  At the end of the auction, you will know the cost for CALTRANS.
+%- Repeat step 4, 1000 times.
+%- Take an average of all the costs. That is the average cost of using SPA with reserve prices.
+%- Compare this number with the number you see in the data. And explain why you
+%  think the cost would differ.

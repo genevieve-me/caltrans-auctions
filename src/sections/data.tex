@@ -1,9 +1,5 @@
 \section{Data}
 
-%/ FIXME: look at his comments
-
-FIX!
-
 \subsection{Institutional Details}
 
 The California Department of Transportation (Caltrans) is the department that
@@ -32,19 +28,28 @@ paid for the project: Caltrans will pay the true price the winner bid.
 
 \input{sections/data-summary.tex}
 
-One immediate takeaway from the summary statistics is that small businesses are often
-refusing to bid on larger contracts, given that their bids are both
-much smaller on average and have a smaller standard deviation.
+For the summary statistics, we excluded auctions with only one bidder. All statistics
+are from that subset of the data.
+The mean small business bid was \$528,318, and the mean large business bid
+was \$1,277,866.
+A possible explanation for this discrepancy is that small businesses were not
+bidding on the largest contracts, perhaps because they do not have the
+capacity for multi-million dollar projects. The smaller standard deviation of
+small business bids also supports this theory.
 
-In addition, out of 705 auctions in total, there were 5.7 bidders in
-each auction on average, and the average bid was \$968,241.65.
+In addition, out of 669 auctions in total, there were 5.8 bidders in
+each auction on average, and the average bid was \$987,619.
+The ``business types present'' statistic refers to whether small business,
+large business, or both types of bidders participated in each auction. The
+mean of 1.64 suggests that the majority of auctions had both types participating.
 
 We calculated the winning bids and saw that on average, the winning bid was
-\$39,417 lower than the state's cost estimate. This is a relatively small
-difference, but it does suggest that competition among the bidders does drive
-the procurement cost down for the state. It could also potentially
-represent a winner's curse if the cost estimates are very accurate,
-but this would require more analysis to confirm.
+\$52,629 lower than the state's cost estimate. CalTrans was therefore able to
+reduce costs compared to their own engineers' estimates by running auctions for
+procurers. Auction theory would suggest that the greater the number of bidders,
+the more the cost will be driven down for the procurer due to competition.
+There could potentially be a winner's curse if it is impossible to drive costs
+much lower than the estimate, but we cannot determine that from this data alone.
 Furthermore, the standard deviation of the differences is quite high
 at almost \$1 million, and there are some cases where Caltrans
 is forced to pay a premium over their estimate - it is unclear if this
@@ -91,12 +96,15 @@ The large business bids do have a longer tail, which reflects that
 they are more able to take on projects with a large cost than
 the smaller businesses.
 There are also clusters in the bid frequencies, which we can see in
-the spikes in the KDEs of the PDFs. It makes sense that the distribution
+the spikes in the KDEs of the PDFs. One possible explanation is that the distribution
 of bids is not perfectly uniform, but instead clusters because projects
 can be grouped into similar size categories, and because people generally prefer
 to deal with round numbers when it comes to money.
 Many more projects will receive bids at \$1 million than at
 \$1,010,000.
+It is also possible that clusters are simply an artifact of the KDE process,
+but we used biased cross-validation to select the bandwidths, which should
+not undersmooth the data.
 
 Because of the data's skew, we applied a log transformation to
 normalize the data. Log scaling data can effectively compress
@@ -126,16 +134,31 @@ The larger businesses look to have a very similar distribution, but just have
 a higher mean, and their tail also extends further up to bids of around \$7-8
 million.
 
-\medskip
+% \newpage
 We also plotted the CDFs to see patterns in the bid sizes between
 the two types of bidders. The smaller average bids of
 the small businesses are very clear in this plot, as the line is strictly
 greater than the large businesses' estimated CDF.
-
 \begin{figure}[htb!]
     \centering
     %\textbf{Your title}\par\medskip
-    \includegraphics[scale=0.7]{imgs/cdf.png}
+    \includegraphics[scale=0.6]{imgs/cdf.png}
+    %\caption{CDF of bids, split by firms deemed small businesses or not}
+\end{figure}
+Lastly, we plotted the CDF of the bid-estimate ratio for only small and
+large businesses. Although the above plot showed the distribution of large
+business bids had a much longer tail than small businesses, they generally
+appear to bid a similar ratio of the estimate. This also suggests that
+large businesses are taking on bigger projects, because when costs are
+higher (where estimate is related to the business's true cost), they
+bid higher just as small businesses do. It also is interesting that because of the
+5\% rule, small businesses could theoretically `overbid,' but they are also
+bidding at the same ratio of the estimate. This is likely because they have less
+economies of scale and want to remain as competitive as possible, even with the
+5\% rule.
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[scale=0.6]{imgs/cdf-bidest.png}
     %\caption{CDF of bids, split by firms deemed small businesses or not}
 \end{figure}
 
@@ -146,31 +169,33 @@ To better understand the bidding behavior of business, we ran regressions on
 bidders, engineer’s estimate, and work days. Bidders is how many bidders there
 were for a certain project, engineer’s estimate is the estimate on how much a
 professional believes the project costs, and work days is how long the project
-will take. The first regression we ran included both small and large
-businesses, and below is the result.
-
+will take. We ran regressions on all businesses, small businesses only, and
+large businesses only.
+The first regression including both small and large businesses gave the equation:
+\[
+\text{Bids} = 222576 - 18609 \text{\# Bidders} + 0.8493 \text{Estimate} + 718 \text{Workdays}
+\]
+The regressions on a subset gave:
+\[
+\begin{aligned}
+\text{Bids} &= 136254 - 16423 \text{\# Bidders} + 0.9469 \text{Estimate} + 149 \text{Workdays} \\
+\text{Bids} &= 178043- 20918 \text{\# Bidders} + 0.8396\text{Estimate} + 1370 \text{Workdays}
+\end{aligned}
+\]
+In addition, below we  have included the regression tables for further analysis.
+\begin{center}
 \input{sections/data-regressions.tex}
+\end{center}
 
-The above table shows the output of three regressions of the
+The above tables show the output of three regressions of the
 number of bidders, estimated cost, and workdays spent on the job,
-on the procurement bids. The first covers all of the data,
-the second only certified small businesses, and the third large businesses.
+on the procurement bids.
 The results of this regression are as we expected. The negative sign on bidders
-is consistent with the theory we studied, because with more bidders in a
+is consistent with the theory, because with more bidders in a
 particular auction, it drives down the price of the bid.
 Similarly, as the engineer’s estimate increases, the bid should
 increase because there is a higher cost for the project; and as work days
 increase, so should the bid because projects that take longer become more expensive.
-
-%\[
-%\text{Bid} = -18,820 \text{Bidders} + 0.849 \text{Engineer’s Estimate} +
-%716 \text{Work Days} + 224,200
-%\]
-%
-%\[
-%\text{Bid} = -16,470 \text{Bidders} + 0.9496 \text{Engineer’s Estimate} +
-%154.3 \text{Work Days} + 135,200
-%\]
 
 The results for small businesses also have the same signs as we expected, for
 the same reasons as above. The only difference in this regression is the degree
@@ -180,14 +205,6 @@ bidders is 154.3 compared with 716 for the regression including all businesses.
 This might indicate that number of work days does not increase the bid as much
 because smaller businesses might not be able to handle the cost of larger
 projects that require more time and capital. Therefore, they can’t bid as high.
-
-%The next regression includes the same variables again, except it only focuses
-%on large business bidders.
-%
-%\[
-%\text{Bid} = -22250 \text{Bidders} + 0.8398 \text{Engineer’s Estimate} +
-%1372 \text{Work Days} + 183900
-%\]
 
 A notable difference in the final regression, which is limited
 to businesses that tend to be larger, is the greater coefficient

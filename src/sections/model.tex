@@ -1,7 +1,5 @@
 \section{Model}
 
-\setlength{\parindent}{0cm}
-
 \subsection{Assumptions}
 
 First, recall the auction rules: a small business bid
@@ -27,47 +25,43 @@ where \(\cdot\) represents parameters and \(E\) represents the estimate.
  
 Bidding functions are assumed to be monotonically increasing in cost.
 Similarly, all bidding functions are assumed to satisfy \(\beta(0) = 0\).
-Require that \(\beta_L(\bar{c}) = \beta_S(\bar{c})\), and that
+Require that \( 1.05 \beta_L(\bar{c}) = \beta_S(\bar{c})\), and that
 each \(\beta_{i}\) has an inverse \(\phi_{i} = \beta_{i}^{-1}\).
 
 Finally, we assume that within the groups, each bidder uses the same optimal
 strategy, denoted \(\beta_S\) and \(\beta_L\).
 
-% Define a maximum cost \(\omega\) at which bidding functions should be equal
-% (common highest bid).
-
 \subsection{Bidders' Optimization Problems}
 
 Since the auction is a first price auction, we can define the expected payoffs
-for a small business \(i\) (with large business competitors \(k\) and
-other small business competitors \(j \ne i\), where the numbers of
-small/large bidders are \(n_S, n_L\)) as:
-
-% \[
-%   \begin{aligned}
-%   \Pi(\beta_S (c_i), c_i) &= (\beta_S(c_i) - c_i) \cdot
-%     P \left( \beta_S (c_i) < \beta_S(c_j) \forall j \neq i \land
-%     \beta_S (c_i) < \frac{1}{1.05} \beta_L(c_k) \forall k \right) \\
-%   &= (\beta_S(c_i) - c_i) \cdot \left(
-%     \left( 1 - F_S(\beta_{S}^{-1}(\beta_S(c_i))) \right)^{n_S - 1}
-%     \left( 1 - F_L(\frac{1}{1.05} \beta_{L}^{-1}(\beta_L(c_i))) \right)^{n_L} \right)
-%   \end{aligned}
-% \]
+for a small business \(i\).
+\( \Pi \) refers to the profit or expected payoff for \(i\).
+The numbers of small/large bidders participating in the auction are
+\(n_S, n_L\)). Index the  large business competitors with \(k\) and
+other small business competitors with \(j \ne i\).
+Recall that for each opponent, \( b_{j} = \beta_{S}(c_{j}) \) and
+\( b_{k} = \beta_{L}(c_{k}) \). 
+Since valuations are private, we simply refer to opponent bids \( b_j, b_k \)
+in the below equation.
+The probability on the right side is that all \(n_S - 1\) SB costs are higher
+than their cost and that all \( n_L \) LB costs are higher than \( \frac{1}{1.05} \) their cost.
+Since costs are private, we estimate this with the inverse bid functions.
 \[
   \begin{aligned}
     P(b_i \text{ wins}) &= P \left(
-    b_i< b_j \forall j \ne i 
-   \land \frac{1}{1.05} b_i < b_k \forall k \right) \\
-  \Pi(\beta_S(c_i), c_i) = \Pi(b_i, c_i) &= (b_i - c_i) \cdot
-    P \left(b_i < \beta_S(c_j) \forall j \neq i \land
-    b_i < 1.05 \beta_L(c_k) \forall k \right) \\
-  \text{Since valuations } & \text{are private, denote opponent bids as } b_j, b_k \\
+    b_i< b_j, \, \forall j \ne i 
+   \, \land \, \frac{1}{1.05} b_i < b_k \forall k \right) \\
+  % \Pi(\beta_S(c_i), c_i) = \Pi(b_i, c_i) &= (b_i - c_i) \cdot
+    % P \left(b_i < \beta_S(c_j) \forall j \neq i \land
+    % b_i < 1.05 \beta_L(c_k) \forall k \right) \\
   \Pi(b_i, c_i) &= (b_i - c_i) \cdot
-    P \left(b_i < b_j \forall j \neq i \land
-    b_i < 1.05 b_k \forall k \right) \\
-  &= (b_i - c_i) \cdot \left(
+    P \left(b_i < b_j, \, \forall j \neq i \, \land \,
+    b_i < 1.05 b_k, \, \forall k \right) \\
+    \text{Probability all } n_S - 1, n_L & \text{ costs are higher, as the
+    bid function is monotonic} \\
+  \Pi(b_i, c_i) &= (b_i - c_i) \cdot \left(
     \left( 1 - F_S(\beta_{S}^{-1}(b_i) \mid E) \right)^{n_S - 1}
-    \left( 1 - F_L(\beta_{L}^{-1}(1.05b_i) \mid E) \right)^{n_L} \right)
+    \left( 1 - F_L(\beta_{L}^{-1}(\frac{1}{1.05}b_i) \mid E) \right)^{n_L} \right)
   \end{aligned}
 \]
 
@@ -77,46 +71,72 @@ small businesses \(j\) and other large busineses \(k \ne i\):
 \[
   \begin{aligned}
     P(b_i \text{ wins}) &=
-    P \left( b_i < \frac{1}{1.05} \cdot b_j \forall j \land
-    b_i< b_k \forall k \ne i \right) \\
+    P \left( b_i < \frac{1}{1.05} \cdot b_j, \, \forall j \, \land \,
+    b_i< b_k, \, \forall k \ne i \right) \\
     % \left( 1 - F_S(1.05 \beta_{S}^{-1}(b_i)) \right)^{n_S}
     % \left( 1 - F_L(\beta_{L}^{-1}(\beta_{L}(c_i))) \right)^{n_L - 1} \right) \\
   \Pi(\beta_L (c_i), c_i) &= (b_i - c_i) \cdot
-    P \left( b_i < \frac{1}{1.05} \cdot b_j \forall j \land
-    b_i< b_k \forall k \ne i \right) \\
+    P \left( b_i < \frac{1}{1.05} \cdot b_j, \, \forall j \, \land \,
+    b_i< b_k, \, \forall k \ne i \right) \\
   &= (b_i - c_i) \cdot \left(
-    \left( 1 - F_S(\beta_{S}^{-1}(\frac{b_i}{1.05}) \mid E) \right)^{n_S}
+    \left( 1 - F_S(\beta_{S}^{-1}(1.05 b_i) \mid E) \right)^{n_S}
     \left( 1 - F_L(\beta_{L}^{-1}(b_i) \mid E) \right)^{n_L - 1} \right)
   \end{aligned}
 \]
+Next, we want to maximize this profit function with respect to the bid \(b_i\),
+since we can manipulate the resulting first-order condition to obtain an equation
+for costs in terms of bids.
+Companies will choose their bid based on
+\( \max_{b_i} \Pi(b_i, c_i) \).
+Note that for \( y = m(x) \), we have
+\[ \frac{d m^{-1}(y)}{dy} = \frac{1}{m'(m^{-1}(y))} \]
 
-Then, they will choose their bid based on their first order condition,
-\(\max_{b_i} \Pi(b_i, c_i)\) or \(\max_{b_i} \Pi(b_i, c_i)\).
+For a small business, this maximization gives the following after applying
+the chain and product rule to the derivative:
+\[
+  \begin{aligned}
+  \frac{\partial}{\partial b_i} & (b_i - c_i) \cdot \left(
+    \left( 1 - F_S(\beta_{S}^{-1}(b_i) \mid E) \right)^{n_S - 1}
+    \left( 1 - F_L(\beta_{L}^{-1}(\frac{b_i}{1.05}) \mid E) \right)^{n_L} \right) \\
+  \implies (b_{i} - c_{i}) \cdot (
+  & \left( 1 - F_L(\beta_{L}^{-1}(\frac{1}{1.05}b_i) \mid E) \right)^{n_L} \cdot
+  (n_S - 1)(1 - F_S(\beta_{S}^{-1}(b_i)))^{n_S - 2} \cdot
+  \frac{-f_{S}(\beta_{S}^{-1}(b_i))}{\beta_{S}'(\beta_{S}^{-1}(b_i))} \\
+  + & \left( 1 - F_S(\beta_{S}^{-1}(b_i) \mid E) \right)^{n_S - 1} \cdot
+  n_L (1 - F_L(\beta_{L}^{-1}(\frac{1}{1.05}b_i) \mid E) )^{n_L - 1}) \cdot \text{ (cont. next line)}\\
+  (-f_{L}(\beta_{L}^{-1} & (\frac{1}{1.05}b_i) \mid E))
+  \cdot \frac{1}{1.05 \beta_{L}'(\beta_{L}^{-1}(\frac{b_i}{1.05}))}) \\
+  + & \left( 1 - F_S(\beta_{S}^{-1}(b_i) \mid E) \right)^{n_S - 1}
+    \left( 1 - F_L(\beta_{L}^{-1}(\frac{1}{1.05}b_i) \mid E) \right)^{n_L} ) = 0
+  \end{aligned}
+\]
+We can then move the last term over and divide through by it, giving
 
-For a small business, this gives the differential equation:
-
-% FIXME: he wants to see the full derivation
-
+\[
+\begin{aligned}
+-1 &= (b_i - c_i) ( (n_S - 1) 
+  (1 - F_S(\beta_{S}^{-1}(b_i)))^{-1} (-f_{S}(\beta_{S}^{-1}(b_i)))
+  \cdot \frac{1}{\beta_{S}'(\beta_{S}^{-1}(b_i))} + \\
++ & n_L (1 - F_L(\beta_{L}^{-1}(\frac{b_i}{1.05})))^{-1} 
+  (-f_{L}(\beta_{L}^{-1}(\frac{1}{1.05}b_i) \mid E))
+  \cdot \frac{1}{1.05 \beta_{L}'(\beta_{L}^{-1}(\frac{b_i}{1.05}))})
+\end{aligned}
+\]
+Taking away a \(-1\) on each side and substituting \(\beta_{S}^{-1}(b_i)\)
+with \(c_i\) gives the differential equation
 \[
   1 = (b_i - c_i) \cdot \left(
     \frac{(n_S - 1) \cdot f_S(c_i \mid E)}{1 - F_S(c_i \mid E) \cdot \beta_S'(c_i)} +
-    \frac{(n_L) \cdot f_L(1.05 c_i \mid E)}{1 - F_L(1.05 c_i \mid E) \cdot \beta_L'(c_i)} \right)
+    \frac{(n_L) \cdot f_L(\frac{c_i}{1.05} \mid E)}{1 - F_L(\frac{c_i}{1.05} \mid E) \cdot \beta_L'(c_i)} \right)
 \]
-
-Similarly, for a large business the first order condition gives:
-
+Following the same process for a large business, the first order condition is equivalent to:
 \[
   1 = (b_i - c_i) \cdot \left(
-    \frac{(n_S) \cdot f_S(\frac{1}{1.05} c_i \mid E)}{1 - F_S(\frac{c_i}{1.05} \mid E) \cdot \beta_S'(c_i)} +
+    \frac{(n_S) \cdot f_S(1.05 c_i \mid E)}{1 - F_S(1.05 c_i \mid E) \cdot \beta_S'(c_i)} +
     \frac{(n_L - 1) \cdot f_L(c_i \mid E)}{1 - F_L(c_i \mid E) \cdot \beta_L'(c_i)} \right)
 \]
-
-FIXME: the boundary conditions need to take the 5\% rule into account.
-
 Together we have a system of equations satisfying
-\(\beta_S (\bar{c}) = \beta_L (\bar{c}) = \bar{c}\) and
-\( \beta_S( \ubar{c} ) = \beta_L( \ubar{c} )\).
+\( \beta_S (\bar{c}) = 1.05 \beta_L (\bar{c}) = \bar{c}\) and
+\( \beta_S( \ubar{c} ) = 1.05 \beta_L( \ubar{c} ) \).
 From this system we will be able to obtain the costs and
 \(F_{L \text{ or } S}(\cdot \mid E)\).
-
-\setlength{\parindent}{1.5em}

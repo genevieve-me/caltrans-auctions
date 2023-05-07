@@ -1,3 +1,34 @@
-This paper analyzes data from 705 procurement auctions held
-by the California Department of Transportation (commonly
-known as CalTrans).
+\section{Introduction}
+
+In this paper we explore the bidding behavior of businesses in the California Department of Transportation (commonly known as Caltrans) auctions.
+Caltrans outsources their labor for highway construction auctions by using low-bid procurement auctions.
+In a low-bid procurement auction, the bidder with the lowest bid wins the auction and the price equals the lowest bid.
+Within Caltrans' auctions there are two types of bidders: small business bidders and large business bidders.
+Large businesses have more resources and capital, and thus have a greater advantage in winning auctions.
+Therefore, to account for this, Caltrans uses bidder preference, such that small businesses will win a particular auction if they are within 5\% of a large business bidder.
+
+We begin with a close exploration of the data, in which we further explain how Caltrans operates and analyze the
+bidding data. This is done through analysis of summary statistics, plots of bidding behavior and a regression analysis of additional variables.
+We have data from 705 procurement auctions held by Caltrans. This paper is broken up into
+five sections, which will analyze the auction data; find the theoretically optimal
+bidding functions according to the rules of Caltrans auctions; recover
+an equation for estimated business costs according to that bidding function;
+find estimated densities of the cost distributions according to our empirical data;
+and use these estimated densities to explore if Caltrans could lower costs by
+using second-price auctions (SPAs) with reserve prices.
+
+This counterfactual was chosen because of two results. The first, the revenue
+equivalence theorem, states that the expected costs/revenue are the same
+for both first and second price auctions as long as they have the same method
+of assigning outcomes and the same expected payment for participants.
+While the 5\% margins for small businesses cannot be implemented in exactly
+the same way in second-price auction, we will elaborate a system for
+per-group reserve prices which should preserve the same outcomes.
+
+Second, although reserve prices are never guaranteed to cut costs in a
+procurement auction, it is possible as long as the number of auction
+participants does not decrease.
+Given this, it is worth studying whether Caltrans and other publicly funded
+utilities which rely on private contractors could reduce their
+expenditures by changing their auction choices.
+
