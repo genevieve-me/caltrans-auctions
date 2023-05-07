@@ -1,9 +1,0 @@
-PWD /home/genevieve/Nextcloud/SP23/Auction/auctionpaper
-INPUT /nix/store/69rk585dygv9p4gpy8ly14my7xp1v3p0-texlive-combined-medium-2022.20221227/share/texmf-var/web2c/texmf.cnf
-INPUT /nix/store/69rk585dygv9p4gpy8ly14my7xp1v3p0-texlive-combined-medium-2022.20221227/share/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /home/genevieve/Nextcloud/SP23/Auction/auctionpaper/src/sections/results.tex
-OUTPUT results.log
-INPUT /nix/store/g93hffrvyrgiq4yqrl5rhhpjaxkpvic4-texlive-combined-medium-2022.20221227-texmf/fonts/map/fontname/texfonts.map
-INPUT /nix/store/g93hffrvyrgiq4yqrl5rhhpjaxkpvic4-texlive-combined-medium-2022.20221227-texmf/fonts/tfm/jknappen/ec/tcrm1000.tfm
-OUTPUT results.pdf
-INPUT /nix/store/69rk585dygv9p4gpy8ly14my7xp1v3p0-texlive-combined-medium-2022.20221227/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map
